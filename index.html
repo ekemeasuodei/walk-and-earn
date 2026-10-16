@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#146b4b"><title>Walk & Earn — Version 2 Blueprint</title>
+<style>
+:root{--g:#146b4b;--p:#e8f7ef;--ink:#18231e;--muted:#66756d;--line:#dce7e0}
+*{box-sizing:border-box}body{margin:0;background:#f5f8f6;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+header{background:var(--g);color:#fff;padding:25px 18px 32px;border-radius:0 0 24px 24px}.wrap{max-width:900px;margin:auto;padding:0 16px}
+.brand{font-size:21px;font-weight:850}.sub{color:#d9f5e5;font-size:14px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}nav button{background:#fff;color:var(--g);border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-weight:750}
+nav button.active{background:var(--g);color:#fff}main{padding:18px 0 40px}.panel{display:none}.panel.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:750}.big{font-size:32px;font-weight:850;color:var(--g);margin:8px 0}
+button,.btn{border:0;background:var(--g);color:white;padding:12px 15px;border-radius:11px;font:inherit;font-weight:750;cursor:pointer;text-decoration:none;display:inline-block}
+.secondary{background:var(--p);color:var(--g);border:1px solid #cbe8d7}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+small,.muted{color:var(--muted);font-size:13px;line-height:1.5}.notice{background:#fff6dc;color:#755311;border-radius:12px;padding:13px;font-size:13px;line-height:1.5}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}ul{padding-left:20px;line-height:1.7}.status{font-size:13px;min-height:20px;color:var(--muted);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:15px}
+</style></head>
+<body>
+<header><div class="wrap"><div class="brand">🚶 Walk & Earn</div><p class="sub">Version 2 planning prototype · Sponsor-funded walking rewards</p></div></header>
+<main class="wrap">
+<div class="notice"><b>Planning/demo mode:</b> This page does not have real user accounts, server storage, sponsor funding, or payouts. Never enter real passwords, bank details, or private information here. Cash balances are not enabled.</div>
+<nav>
+<button class="active" data-tab="home">Overview</button><button data-tab="account">Account preview</button><button data-tab="sponsors">Sponsors</button><button data-tab="rules">Reward rules</button><button data-tab="admin">Admin preview</button>
+</nav>
+<section id="home" class="panel active">
+<div class="grid">
+<div class="card"><div class="kicker">Daily steps</div><div class="big" id="stepDemo">0</div><small>Demo counter for planning only</small><div style="margin-top:14px" class="row"><button id="stepAdd">Add 100 demo steps</button><button class="secondary" id="stepReset">Reset</button></div></div>
+<div class="card"><div class="kicker">Reward status</div><div class="big">Not funded</div><p class="muted">No withdrawable cash is available in this prototype. Reward rules must be backed by sponsor funds before launch.</p></div>
+<div class="card"><div class="kicker">Withdrawal target</div><div class="big">₦1,000</div><p class="muted">Planned minimum request amount. A request should only be enabled when approved rewards cover it and funds are available.</p></div>
+</div>
+<div class="card"><h3>Launch checklist</h3><ul><li>Publish terms, privacy policy, reward calculation and country eligibility.</li><li>Set up authentication and protected database records.</li><li>Secure sponsor agreements and reserve the reward budget.</li><li>Validate steps and prevent repeated or fabricated submissions.</li><li>Test payouts with a payment provider before any live payments.</li></ul></div>
+</section>
+<section id="account" class="panel">
+<div class="card"><h2>Account screen preview</h2><p class="muted">Layout demonstration only. It does not create or authenticate an account.</p>
+<label>Email address</label><input type="email" placeholder="you@example.com" autocomplete="off">
+<label>Password</label><input type="password" placeholder="Demo only — do not enter a real password" autocomplete="off">
+<div class="row" style="margin-top:14px"><button id="signup">Preview sign up</button><button class="secondary" id="login">Preview login</button></div><div id="accountStatus" class="status"></div>
+</div>
+<div class="card"><h3>Production account requirements</h3><p class="muted">Use a trusted authentication service. Enforce row-level access controls so users can only read their own profile, step summaries, reward ledger, and withdrawal requests.</p></div>
+</section>
+<section id="sponsors" class="panel">
+<div class="card"><h2>Sponsor programme</h2><p class="muted">A page for businesses interested in sponsoring walking challenges. This form is a local preview and does not send information.</p>
+<label>Business name</label><input id="sName" placeholder="Company name">
+<label>Contact email</label><input id="sEmail" type="email" placeholder="partnerships@company.com">
+<label>Campaign budget (₦)</label><input id="sBudget" type="number" min="0" placeholder="e.g. 500000">
+<label>Campaign idea</label><textarea id="sIdea" rows="3" placeholder="Example: fund a 30-day walking challenge"></textarea>
+<button id="sPreview" style="margin-top:12px">Preview sponsor enquiry</button><div id="sStatus" class="status"></div>
+</div>
+<div class="card"><h3>How sponsor funding should work</h3><ul><li>Sign an agreement specifying campaign dates, eligible countries and budget.</li><li>Record the sponsor's confirmed payment and reserve the reward portion.</li><li>Set a capped reward formula and maximum liability.</li><li>Report campaign performance transparently.</li></ul></div>
+</section>
+<section id="rules" class="panel">
+<div class="card"><h2>Draft reward rules</h2><p class="muted">Use this as a starting outline; finalize it with legal and payment-provider advice before launch.</p>
+<ul><li><b>Eligible activity:</b> steps recorded through supported devices, subject to fraud checks.</li><li><b>Reward formula:</b> publish the exact rate, daily cap, campaign limits, and expiry rules before users participate.</li><li><b>Approval:</b> steps and rewards remain pending until validation and sponsor budget checks pass.</li><li><b>Withdrawal:</b> minimum ₦1,000 for eligible Nigerian users, only when the available funded balance is sufficient.</li><li><b>Countries:</b> international availability depends on local law, sponsor coverage, identity checks, and payout provider support.</li><li><b>No guaranteed income:</b> users must not be promised a fixed amount per step unless the funds are reserved and payment terms are enforceable.</li></ul>
+<div class="notice">Do not publish an unverified cash rate. A rewards ledger must distinguish pending, approved, reserved, paid, failed, and reversed entries.</div>
+</div></section>
+<section id="admin" class="panel">
+<div class="card"><h2>Admin dashboard preview</h2><div class="grid"><div class="card"><div class="kicker">Sponsor funds received</div><div class="big">₦0</div></div><div class="card"><div class="kicker">Rewards reserved</div><div class="big">₦0</div></div><div class="card"><div class="kicker">Payouts completed</div><div class="big">0</div></div></div>
+<p class="muted">These are sample placeholders, not connected metrics.</p><h3>Admin actions required in production</h3><ul><li>Review suspicious step patterns.</li><li>Approve or reject reward batches with audit logs.</li><li>Review withdrawals and reconcile provider webhooks.</li><li>Pause campaigns when the reserved budget is exhausted.</li><li>Never expose secret payment keys in browser code.</li></ul></div>
+</section>
+</main><footer>Walk & Earn · Version 2 blueprint · No cash payouts enabled</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');
+}));
+let steps=0;const stepRender=()=>document.getElementById('stepDemo').textContent=steps.toLocaleString();
+document.getElementById('stepAdd').onclick=()=>{steps+=100;stepRender()};
+document.getElementById('stepReset').onclick=()=>{steps=0;stepRender()};
+document.getElementById('signup').onclick=()=>document.getElementById('accountStatus').textContent='Preview only: no account was created. Connect authentication before launch.';
+document.getElementById('login').onclick=()=>document.getElementById('accountStatus').textContent='Preview only: no login occurred. Connect authentication before launch.';
+document.getElementById('sPreview').onclick=()=>{
+ const n=document.getElementById('sName').value.trim(),e=document.getElementById('sEmail').value.trim(),b=Number(document.getElementById('sBudget').value);
+ document.getElementById('sStatus').textContent=(!n||!e||!b||b<=0)?'Enter a business name, contact email, and proposed budget to preview.':'Enquiry preview for '+n+' with proposed budget ₦'+b.toLocaleString()+'. Nothing has been sent or saved.';
+};
+</script></body></html>
